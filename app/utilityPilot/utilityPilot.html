@@ -1,0 +1,26 @@
+
+  <form class="pilot-select-form">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                  <div class="card">
+                      <h2 class="login-title">Please select pilot</h2>
+                      <div class="card-content">
+                        <div class="form-check" ng-repeat="pilot in utilityPilots">
+                            <label class="form-check-label" for="{{pilot.name}}">
+                                <input class="form-check-input" type="radio" ng-model="selectedPilot.name" id="{{pilot.name}}" value="{{pilot.name}}">
+                                {{pilot.name}}
+                            </label>
+                        </div>
+                        <div class="btn-wrapper">
+                              <button type="submit" class="btn btn-primary btn-md" ng-click="saveUtilityPilot()">Submit</button>
+                        </div>
+
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+
+        </div>
+      </form>

@@ -1,0 +1,178 @@
+body {
+    background: #E5E5E5;
+}
+.card {
+    background: #fff;
+    /* width: 50%; */
+    border:1px solid #cac5c5;
+    border-radius: 5px;
+    margin-top: 15%;
+}
+.login-title {
+    padding-left: 10%;
+    padding-top: 10%;
+}
+.card-content {
+    padding:8%;
+}
+.form-control  {
+    height: 42px;
+}
+button {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    text-align:  center;
+}
+
+header.navbar {
+  height: 70px;
+  background-color: #354052;
+  background-image: none;
+  border-bottom: none;
+  border-bottom-color: #ccc;
+  z-index: 500;
+}
+header.navbar.mini {
+  height: 40px;
+  min-height: 40px;
+}
+header.navbar.mini .bidgely-header-logo {
+  font-size: 14px;
+  padding: 0px;
+  margin: 5px 0px 0px 10px;
+  height: 30px;
+  width: 120px;
+  background-size: 120px 30px;
+}
+header.navbar.mini .navbar-toggle {
+  border: none;
+  margin: 5px 5px 0px 0px;
+}
+header.navbar.mini .navbar-toggle:hover,
+header.navbar.mini .navbar-toggle:active,
+header.navbar.mini .navbar-toggle:focus {
+  background-image: none;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+header.navbar.mini .vertical-divider {
+  height: 40px;
+}
+header.navbar.mini .navbar-nav > li > a {
+  padding: 10px 15px;
+}
+header.navbar.mini .navbar-collapse.collapse {
+  display: none;
+}
+header.navbar.mini .navbar-collapse.in,
+header.navbar.mini .navbar-collapse.collapsing {
+  display: block;
+  position: relative;
+  background-color: #354052;
+}
+header.navbar .container {
+  background-color: #354052;
+}
+header.navbar .navbar-collapse {
+  max-height: none;
+  overflow: hidden;
+}
+header.navbar .vertical-divider {
+  background-color: #2a3546;
+  width: 1px;
+  height: 69px;
+}
+header.navbar .bidgely-setup-link,
+header.navbar .navbar-link,
+header.navbar .bidgely-header-logo {
+  font-size: 14px;
+  padding-top: 26px;
+  padding-bottom: 23px;
+}
+header.navbar .navbar-toggle {
+  margin-top: 15px;
+}
+header.navbar li span {
+  color: #fff;
+}
+header.navbar li span.text {
+  display: none;
+}
+header.navbar .notice-icon {
+  width: 8px;
+  height: 8px;
+  background-color: #d9534f;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  border-radius: 4px;
+}
+header.navbar a.btn {
+  position: relative;
+  top: 20px;
+  padding: 5px 10px;
+  margin-left: 15px;
+  color: #fff;
+}
+header.navbar ul.account-dropdown li {
+  position: relative;
+  padding: 2px 0px 2px 5px;
+}
+header.navbar ul.account-dropdown li .notice-icon {
+  top: 5px;
+  left: 15px;
+}
+@media only screen and (max-width: 767px) {
+  header.navbar .vertical-divider {
+    display: none;
+  }
+  header.navbar a.btn {
+    top: 0px;
+    margin: 15px;
+  }
+  header.navbar li span.text {
+    display: inline-block;
+    margin-left: 15px;
+  }
+}
+@media screen and (min-width: 446px) and (max-width: 768px) {
+  header.navbar .navbar-link {
+    padding-top: 20px;
+  }
+}
+header.navbar a.navbar-link.btn {
+  color: #fff;
+}
+header.bidgely-navbar ul.nav {
+  padding-bottom: 0px;
+}
+a.bidgely-header-logo {
+  display: block;
+  width: 160px;
+  height: 40px;
+  margin-top: 17px;
+  margin-left: 5px;
+  background-size: 160px 40px;
+}
+a.bidgely-header-logo.bidgely-logo {
+  background: transparent url("../images/img_bidgely_logo.png") no-repeat 0 0;
+}
+a.bidgely-header-logo span {
+  visibility: hidden;
+}
+/* Set the fixed height of the footer here */
+footer {
+  min-height: 60px;
+  padding-top: 19px;
+  color: #FFFFFF;
+  background-color: #1f262f;
+  border-top: 1px solid #354052;
+}
+
+
+#wrap {
+  margin-top:  80px;
+  min-height: 544px;
+}
