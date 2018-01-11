@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Unsubscribe Users For this events</h3>
+</div>
+ <div class="modal-body" id="modal-body">
+     <div class="" ng-repeat="event in emailEvents">
+          <label><input type="checkbox" ng-model="event.value" name="chk-eventType" ng-checked="event.value"/>  {{event.text}}
+     </div>
+ </div>
+ <div ng-if="actionList.length > 0">
+    <p ng-repeat="action in actionList">
+        {{action.msg}}
+    <p>
+ </div>
+ <div class="modal-footer">
+     <button class="btn btn-primary" type="button" ng-disabled="disableBtn" ng-click="unsubscribe()">Unsubscribe</button>
+     <button class="btn btn-warning" type="button" ng-disabled="disableBtn" ng-click="cancel()">Cancel</button>
+ </div>

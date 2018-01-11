@@ -10,84 +10,22 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="bidgely-header-logo bidgely-logo" ng-click="navigate()">
-                        <span>bdg</span>
+                        <span>bidgely</span>
                     </a>
                 </div>
-                <!-- <div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
-                    <ul class="nav navbar-nav navbar-right" id="header-list" ng-if="isUserLoggedIn">
-                      <li class="dropdown" dropdown on-toggle="toggled(open)">
-                          <a href="#" id="account-dropdown" dropdown-toggle  class="dropdown-toggle navbar-link">
-                              <span class="bidgely-icon bidgely-icon-account default">
-                              </span>
-                              <span class="text">
-                                  dfs
-                              </span>
-                              <span><div class="notice-icon" ng-class="{'hidden':allProfileCompleted}"></div></span>
-                          </a>
-                        </li>
-                      </ul>
-                </div> -->
                 <div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
                     <ul class="nav navbar-nav navbar-right" id="header-list" ng-if="isUserLoggedIn">
-                        <li class="vertical-divider" ng-if="showAdminItem"></li>
                         <li >
-                            <a class="navbar-link"  ng-click="menuClicked('adminUsers')">
-                                <span class="glyphicon glyphicon-lock default"></span>
-                                <span class="text">ddf</span>
-                            </a>
-                        </li>
-                        <li class="vertical-divider" ng-if="showAdminUtilityItem"></li>
-                        <li ng-if="showAdminUtilityItem">
-                            <a class="navbar-link"  ng-click="menuClicked('adminUtilityPilots')">
-                                <span class="glyphicon glyphicon-globe default"></span>
-                                <span class="text">ss</span>
-                            </a>
-                        </li>
-                        <li class="vertical-divider" ng-show="showDashboard" ng-if="showMenuItems"></li>
-                        <li ng-show="showDashboard" ng-if="showMenuItems">
-                            <a class="navbar-link"  ng-click="menuClicked('dashboard')">
-                                <span id="header-dashboard" class="bidgely-icon bidgely-icon-dashboard default">
-                                </span>
-                                <span class="text">
-                                    dadf
-                                </span>
+                            <a class="navbar-link" ng-click="menuClicked('utilityPilot')">
+                                <span >{{utilityPilot.name}}</span>
                             </a>
                         </li>
                         <li class="vertical-divider"></li>
-                        <li class="dropdown" dropdown on-toggle="toggled(open)">
-                            <a href="#" id="account-dropdown" dropdown-toggle  class="dropdown-toggle navbar-link">
-                                <span class="bidgely-icon bidgely-icon-account default">
-                                </span>
-                                <span class="text">
-                                    fdfd
-                                </span>
-                                <span><div class="notice-icon" ng-class="{'hidden':allProfileCompleted}"></div></span>
+                        <li >
+                            <a class="navbar-link" ng-click="menuClicked('logout')">
+                                <span >logout</span>
                             </a>
-                            <ul class="dropdown-menu account-dropdown" aria-labelledby="account-dropdown">
-                                <li >
-                                    <a ng-click="menuClicked('accountSettings')" >
-                                        seetrtr
-                                    </a>
-                                </li>
-                                <li >
-                                    <a ng-click="menuClicked('setup')" >
-                                        setup
-                                    </a>
-                                </li>
-                                <li >
-                                    <a ng-click="menuClicked('utilityAndRate')" >
-                                        <div class="notice-icon" ng-class="{'hidden':profile.utilityCompleted}"></div>
-                                        utitle
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ng-click="menuClicked('logout')" >
-                                        logout
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
-                        <li class="vertical-divider" setup-hidden="true"></li>
                     </ul>
                 </div>
             </div>

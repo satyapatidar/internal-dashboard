@@ -23,11 +23,11 @@ angular.module('bidgely')
         var getSearchResult = function () {
             var deferred = $q.defer();
             $http({
-              url: "https://" + $scope.utilityPilot.url + "/v2.0/users/search?text=" + encodeURIComponent($scope.search.query) + "&showMeterId=false&offset=100&limit=100",
+              url: "https://" + $scope.utilityPilot.url + "/v2.0/users/search?text=" + encodeURIComponent($scope.search.query) + "&showMeterId=false",
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
-                  'Authorization': 'bearer' + $scope.utilityPilot.token
+                  'Authorization': 'bearer ' + $scope.utilityPilot.token
               }
             }).success(function (data) {
                 deferred.resolve(data.payload);
@@ -38,6 +38,6 @@ angular.module('bidgely')
         };
 
         var populateSearchList = function (searchResults) {
-
+            $scope.displaySearchResults = searchResults.data;
         };
     });

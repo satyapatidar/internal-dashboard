@@ -1,0 +1,21 @@
+<div class="card group dashboard-container">
+    <h1 class="card-heading">Upload</h1>
+    <form class="form">
+    <div class="form-group">
+        <div class=" col-sm-4 col-xs-8">
+          <input type="file" file-reader="fileContent" class="form-control" placeholder="upload"/>
+      </div>
+  </div>
+      <div class="form-group">
+       <button class="btn btn-primary button" ng-click="fileUpload()">Upload</button>
+
+   </div>
+</form>
+
+<div class="button-group">
+  <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="unsubscribeUsers()">unsubscribe</button>
+  <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="deactivateUsers()">Deactivate</button>
+  <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="passwordReset()">password Reset</button>
+  <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="triggerDissag()">Trigger dissag</button>
+</div>
+</div>

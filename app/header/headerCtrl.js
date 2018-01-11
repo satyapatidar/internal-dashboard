@@ -47,7 +47,7 @@ angular.module('bidgely')
 
                     break;
                   case "logout":
-                    $state.go(Navigation.logout.name);
+                    $state.go('logout');
                     break;
               }
 

@@ -1,3 +1,19 @@
-<input type="text" class="form-control text" placeholder="Search" ng-model="search.query">
-
-<button class="btn btn-primary button" ng-click="searchData()">search</button>
+<div class="card search dashboard-container">
+    <h1 class="card-heading">Search</h1>
+    <form class="form">
+        <div class="form-group">
+            <div class="col-sm-4 col-xs-8">
+              <input type="text" class="form-control" placeholder="Search" ng-model="search.query">
+          </div>
+           <button class="btn btn-primary search-btn" ng-click="searchData()"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+         </div>
+    </form>
+</div>
+<div class="card  result-wrapper">
+  <div class="details" ng-repeat="searchResult in displaySearchResults">
+      <div class="name">{{searchResult.firstName}} {{searchResult.lastName}}</div>
+      <div class="email">{{searchResult.email}}</div>
+      <div class="mobile">{{searchResult.homeAccounts.phoneNumber}}</div>
+      <div class="mobile" ng-if='searchResult.partnerUserId'>AcountId: {{searchResult.partnerUserId}}</div>
+  </div>
+</div>

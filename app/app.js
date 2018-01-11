@@ -1,4 +1,4 @@
-var bidgelyApp = angular.module('bidgely', ['ui.router', 'LocalForageModule'])
+var bidgelyApp = angular.module('bidgely', ['ui.router', 'LocalForageModule', 'ui.bootstrap', 'ngAnimate', 'ngTouch'])
     .run(function ($rootScope, $state, $stateParams, $q, BidgelyStorage) {
 
       $rootScope.headerTemplate = 'app/header/header.html';

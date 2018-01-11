@@ -27,14 +27,14 @@ angular.module('bidgely')
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
-                  'Authorization': 'bearer' + $scope.utilityPilot.token
+                  'Authorization': 'bearer ' + $scope.utilityPilot.token
               }
           }).success(function (data) {
                 if (data.payload.user.roleId !== 'ROLE_ADMIN') {
                     $scope.showAuthFailMsg = true;
                 }
                 BidgelyStorage.setItem('isLoggedIn', true).then(function () {
-                  $rootScope.accessToken = data.payload.accessToken;
+                  $rootScope.authToken = data.payload.accessToken;
                   $state.go('dashboard.search');
                 });
           }).error(function (err) {

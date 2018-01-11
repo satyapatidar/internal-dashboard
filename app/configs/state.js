@@ -8,6 +8,11 @@ bidgelyApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
           templateUrl: 'app/login/login.html',
           controller: 'LoginCtrl'
       })
+      .state('logout', {
+          url: '/logout',
+          templateUrl: 'app/logout/logout.html',
+          controller: 'LogoutCtrl'
+      })
       .state('utilityPilot', {
           url: '/utilityPilot',
           templateUrl: 'app/utilityPilot/utilityPilot.html',
@@ -15,15 +20,16 @@ bidgelyApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       })
       .state('dashboard', {
           abstract: true,
-          templateUrl: 'app/dashboard/dashboard.html'
+          templateUrl: 'app/dashboard/dashboard.html',
+          controller: 'DashboardCtrl'
       })
       .state('dashboard.search', {
           url: '/dashboard/search',
           templateUrl: 'app/dashboard/search/search.html',
           controller: "SearchCtrl"
       })
-      .state('dashboard.upload', {
-          url: '/dashboard/uploadId',
+      .state('dashboard.bulkUpdate', {
+          url: '/dashboard/bulkUpdate',
           templateUrl: 'app/dashboard/fileUpload/fileUpload.html',
           controller: "FileUploadCtrl"
       })

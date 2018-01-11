@@ -1,8 +1,25 @@
-testing
-<div id="middle-container">
-    <div id="content-content" class="content-content">
-        <div class="container">
-            <div ui-view></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="content">
+            <div class="col-xs-4 col-sm-3">
+                <div class="card menu">
+                    <ul class="nav nav-stacked">
+                        <li>
+                            <a href="#" ng-click="sideMenuClicked($event, 'fileUpload')">
+                                <span class="link"> Bulk Updation </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" ng-click="sideMenuClicked($event, 'search')">
+                                <span class="link">Search user</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-8 col-sm-9">
+                <div ui-view></div>
+          </div>
         </div>
-    </div>
+      </div>
 </div>
