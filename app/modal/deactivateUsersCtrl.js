@@ -2,9 +2,6 @@ angular.module('bidgely')
     .controller('DeactivateUsersCtrl', function ($scope, $q, parameters, $uibModalInstance, $http) {
         var uuids = parameters;
         var _utilityPilot = null;
-        // last is "" so -2
-        var _lastIndex = parameters.length - 2;
-        var _currentIndex = 0;
 
         $scope.actionList = [];
         $scope.cancel = function () {
@@ -18,13 +15,19 @@ angular.module('bidgely')
 
         $scope.deactivate = function () {
             if (_utilityPilot) {
-                postCalls(_currentIndex + 1)
+                postCalls(0);
             }
         };
 
         var postCalls = function (currInd) {
+            var uuid = uuids[currInd];
+            if (!uuid) {
+              $scope.actionList.push({msg: "Done deactivating all the users."});
+              $scope.disableBtn = false;
+              return;
+            }
             $http({
-                url: "https://" + _utilityPilot.url + "/meta/users/" + uuids[currInd] + "/homes/1/gws",
+                url: "https://" + _utilityPilot.url + "/meta/users/" + uuid + "/homes/1/gws",
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
@@ -41,49 +44,27 @@ angular.module('bidgely')
                   }
                 }
                 if (!decommissionGateway) {
-                    if (currInd == _lastIndex) {
-                        $scope.actionList.push({msg: "Completed deactivate action"});
-                        $scope.disableBtn = false;
-                        return;
-                    } else {
-                        postCalls((currInd + 1));
-                        return;
-                    }
+                    $scope.actionList.push({msg: "No decommisioned=false gateway found"});
+                    postCalls((currInd + 1));
+                    return;
                 }
                 var promises = {
                       decommissionUser: decommissionUserCall(decommissionGateway),
-                      homeData: updateHomeData(uuids[currInd])
+                      userData: updateUserData(uuids[currInd])
                 };
 
                 $q.all(promises).then(function () {
-                    $scope.actionList.push({msg: "deactivate for" + uuids[currInd]});
-                    if (currInd == _lastIndex) {
-                        $scope.actionList.push({msg: "Completed deactivate action"});
-                        $scope.disableBtn = false;
-                        return;
-                    } else {
-                        postCalls((currInd + 1));
-                    }
-                }, function (error) {
-                    $scope.actionList.push({msg: "failed to deactivate for" + uuids[currInd]});
-                    if (currInd == _lastIndex) {
-                        $scope.actionList.push({msg: "Completed deactivate action"});
-                        $scope.disableBtn = false;
-                        return;
-                    } else {
-                        postCalls((currInd + 1));
-                    }
+                    postCalls((currInd + 1));
+                }, function (response, status) {
+                    var message = "Something went wrong on the server.";
+                    $scope.actionList.push({msg: "Failed: " + message});
+                    postCalls((currInd + 1));
                 });
 
-            }).error(function (data, status, headers, config) {
-                $scope.actionList.push({msg: "failed to deactivate for" + uuids[currInd]});
-                if (currInd == _lastIndex) {
-                    $scope.actionList.push({msg: "Completed deactivate action"});
-                    $scope.disableBtn = false;
-                    return;
-                } else {
-                    postCalls((currInd + 1));
-                }
+            }).error(function (response, status, headers, config) {
+                var message = (status == 500) ? "Something went wrong on the server." : response.error.message;
+                $scope.actionList.push({msg: "Failed: " + message});
+                postCalls((currInd + 1));
             });
         };
 
@@ -105,23 +86,50 @@ angular.module('bidgely')
             return deferred.promise;
         };
 
-        var updateHomeData = function (uuid) {
+        var getUserData = function (uuid) {
             var deferred = $q.defer();
             $http({
-                url: "https://" + _utilityPilot.url + "/meta/users/" + uuid,
-                method: "POST",
-                data: JSON.stringify({uname: "deactivate", email: "deactivate",fname: "deactivate", lname: "deactivate"}),
+                url: "https://" + _utilityPilot.url + "/v2.0/users/" + uuid,
+                method: "GET",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + _utilityPilot.token
                 }
             }).success(function (data, status, headers, config) {
-                console.log(data);
-                deferred.resolve();
+                deferred.resolve(data);
             }).error(function (data, status, headers, config) {
                 deferred.reject();
             })
+            return deferred.promise;
+        };
+
+        var updateUserData = function (uuid) {
+            var deferred = $q.defer();
+            getUserData(uuid).then(function(data) {
+              var uname = "DEACTIVATED-" + data.userName;
+              var email = "DEACTIVATED-" + data.email;
+              var fname = "DEACTIVATED-" + data.firstName;
+              var lname = "DEACTIVATED-" + data.lastName;
+              $http({
+                  url: "https://" + _utilityPilot.url + "/v2.0/users/" + uuid,
+                  method: "POST",
+                  data: JSON.stringify({userName: uname, email: email, firstName: fname, lastName: lname}),
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                      'Authorization': 'bearer ' + _utilityPilot.token
+                  }
+              }).success(function (data, status, headers, config) {
+                  console.log(data);
+                  deferred.resolve();
+              }).error(function (data, status, headers, config) {
+                  deferred.reject();
+              })
+            }, function() {
+              deferred.reject();
+            });
+
             return deferred.promise;
         };
     });

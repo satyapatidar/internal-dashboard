@@ -3,9 +3,6 @@ angular.module('bidgely')
 
       var uuids = parameters;
       var _utilityPilot = null;
-      // last is "" so -2
-      var _lastIndex = parameters.length - 2;
-      var _currentIndex = 0;
 
       $scope.actionList = [];
       $scope.cancel = function () {
@@ -18,36 +15,32 @@ angular.module('bidgely')
 
       $scope.triggerDisagg = function () {
           if (_utilityPilot) {
-              postCall(_currentIndex + 1);
+              postCall(0);
           }
       };
 
       var postCall = function (currInd) {
+          var uuid = uuids[currInd];
+          if (!uuid) {
+            $scope.actionList.push({msg: "Done triggering disagg for all the users."});
+            $scope.disableBtn = false;
+            return;
+          }
+
           $http({
-              url: "https://" + _utilityPilot.url + "/meta/users/" + uuids[currInd] + "/homes/1/modified?urgent=true",
+              url: "https://" + _utilityPilot.url + "/meta/users/" + uuid + "/homes/1/modified?urgent=true",
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
                   'Authorization': 'bearer ' + _utilityPilot.token
               }
           }).success(function (data, status, headers, config) {
-              $scope.actionList.push({msg: "triggering disagg for " + uuids[currInd]});
-              if (currInd == _lastIndex) {
-                  $scope.actionList.push({msg: "Completed trigger disagg action"});
-                  $scope.disableBtn = false;
-                  return;
-              } else {
-                  postCall((currInd + 1));
-              }
-          }).error(function (erorr) {
-              $scope.actionList.push({msg: "failed for " + uuids[currInd]});
-              if (currInd == _lastIndex) {
-                  $scope.actionList.push({msg: "Completed disagg action"});
-                  $scope.disableBtn = false;
-                  return;
-              } else {
-                  postCall((currInd + 1));
-              }
+              $scope.actionList.push({msg: "Done"});
+              postCall((currInd + 1));
+          }).error(function (response, status) {
+              var message = (status == 500) ? "Something went wrong on the server." : response.error.message;
+              $scope.actionList.push({msg: "Failed: " + message});
+              postCall((currInd + 1));
           });
       };
 

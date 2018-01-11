@@ -23,23 +23,17 @@ angular.module('bidgely')
       var processData = function() {
           var fileContent = $scope.fileContent;
           // split content based on new line
-          var allTextLines = fileContent.split(/\r\n|\n/);
-          var headers = allTextLines[0].split(',');
-          var lines = [];
+          var lines = fileContent.split(/\r\n|\n/);
+          var uuids = [];
 
-          for ( var i = 0; i < allTextLines.length; i++) {
-              // split content based on comma
-              var data = allTextLines[i].split(',');
-              if (data.length == headers.length) {
-                  var tarr = [];
-                  for ( var j = 0; j < headers.length; j++) {
-                      tarr.push(data[j]);
-                  }
-                  lines.push(tarr);
-              }
+          for ( var i = 0; i < lines.length; i++) {
+            if(!lines[i]) {
+              continue;
+            }
+            uuids.push(lines[i]);
           }
-          $scope.data = lines;
-          $scope.totalUsers = lines.length - 1;
+          $scope.uuids = uuids;
+          $scope.totalUsers = uuids.length;
       };
 
       $scope.unsubscribeUsers = function () {
@@ -50,7 +44,7 @@ angular.module('bidgely')
               size: 'md',
               resolve: {
                   parameters: function () {
-                      return $scope.data;
+                      return $scope.uuids;
                   }
               }
           });
@@ -64,7 +58,7 @@ angular.module('bidgely')
               size: 'md',
               resolve: {
                   parameters: function () {
-                      return $scope.data;
+                      return $scope.uuids;
                   }
               }
           });
@@ -78,7 +72,7 @@ angular.module('bidgely')
               size: 'md',
               resolve: {
                   parameters: function () {
-                      return $scope.data;
+                      return $scope.uuids;
                   }
               }
           });
@@ -92,7 +86,7 @@ angular.module('bidgely')
             size: 'md',
             resolve: {
                 parameters: function () {
-                    return $scope.data;
+                    return $scope.uuids;
                 }
             }
         });

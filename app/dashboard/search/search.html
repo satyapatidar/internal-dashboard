@@ -4,7 +4,7 @@
         <div class="form-group">
             <div class="row">
               <div class="col-sm-5">
-                  <input type="text" class="form-control" placeholder="Search by Account Id or Email" ng-model="search.query">
+                  <input type="text" class="form-control" placeholder="Search by Account Id, Email, First Name, etc" ng-model="search.query">
               </div>
               <div class="col-sm-7">
                   <button class="btn btn-primary search-btn" ng-click="searchData()"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
@@ -17,8 +17,9 @@
   <h3>Search Results:</h3>
   <div class="details" ng-repeat="searchResult in displaySearchResults">
       <div class="name">{{searchResult.firstName}} {{searchResult.lastName}}</div>
-      <div class="email">{{searchResult.email}}</div>
-      <div class="mobile">{{searchResult.homeAccounts.phoneNumber}}</div>
+      <div class="email">uuid: {{searchResult.uuid}}</div>
+      <div class="email">Email: {{searchResult.email}}</div>
+      <div class="mobile">Phone #: {{searchResult.homeAccounts.phoneNumber}}</div>
       <div class="mobile" ng-if='searchResult.partnerUserId'>AcountId: {{searchResult.partnerUserId}}</div>
   </div>
   <div class="no-results" ng-if="search.query && (!displaySearchResults || displaySearchResults.length == 0)">No results found.</div>

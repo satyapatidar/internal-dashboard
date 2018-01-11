@@ -1,6 +1,6 @@
 <div class="card group dashboard-container">
     <h2 class="card-heading">Update multiple users in one shot</h2>
-    <p><label>Upload csv file of uuids</label></p>
+    <p><label>Upload file of uuids (one uuid in a line each)</label></p>
     <form class="form">
       <div class="row">
         <div class=" col-sm-4 col-xs-8">
@@ -17,7 +17,7 @@
   </form>
 
   <p ng-if="totalUsers"><strong>Total Users in File:</strong> {{totalUsers}}</p>
-  <p ng-if="totalUsers">Please click on the desired button to perform that action on all the uploaded users in csv file:</p>
+  <p ng-if="totalUsers">Please click on the desired button to perform that action on all the uploaded users in file:</p>
   <div class="button-group">
     <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="unsubscribeUsers()">Unsubscribe</button>
     <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="deactivateUsers()">Deactivate</button>
