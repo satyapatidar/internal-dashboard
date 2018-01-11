@@ -72,7 +72,12 @@ angular.module('bidgely')
                 }
             }).error(function (err) {
                 $scope.actionList.push({msg: "Failed for this user " + uuids[currInd]});
-                console.log("Err");
+                if (currInd == _lastIndex) {
+                    $scope.disableBtn = false;
+                    return;
+                } else {
+                    postData((currInd + 1));
+                }
                 console.log(err);
             });
         }

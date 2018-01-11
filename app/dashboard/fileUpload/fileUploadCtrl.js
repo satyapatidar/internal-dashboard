@@ -3,7 +3,7 @@ angular.module('bidgely')
 
       $scope.noFileData = true;
       $scope.fileContent = null;
-
+      $scope.totalUsers = null;
       $scope.$on('$viewContentLoaded', function () {
           BidgelyStorage.getItem('utilityPilot').then(function (value) {
               if (!value) {
@@ -39,6 +39,7 @@ angular.module('bidgely')
               }
           }
           $scope.data = lines;
+          $scope.totalUsers = lines.length - 1;
       };
 
       $scope.unsubscribeUsers = function () {

@@ -1,21 +1,27 @@
 <div class="card group dashboard-container">
-    <h1 class="card-heading">Upload</h1>
+    <h2 class="card-heading">Update multiple users in one shot</h2>
+    <p><label>Upload csv file of uuids</label></p>
     <form class="form">
-    <div class="form-group">
+      <div class="row">
         <div class=" col-sm-4 col-xs-8">
-          <input type="file" file-reader="fileContent" class="form-control" placeholder="upload"/>
-      </div>
+          <div class="form-group">
+            <input type="file" file-reader="fileContent" class="form-control" placeholder="upload"/>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <button class="btn btn-primary button" ng-click="fileUpload()">Upload</button>
+          </div>
+       </div>
+    </div>
+  </form>
+
+  <p ng-if="totalUsers"><strong>Total Users in File:</strong> {{totalUsers}}</p>
+  <p ng-if="totalUsers">Please click on the desired button to perform that action on all the uploaded users in csv file:</p>
+  <div class="button-group">
+    <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="unsubscribeUsers()">Unsubscribe</button>
+    <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="deactivateUsers()">Deactivate</button>
+    <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="passwordReset()">Reset Password</button>
+    <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="triggerDissag()">Trigger Disagg</button>
   </div>
-      <div class="form-group">
-       <button class="btn btn-primary button" ng-click="fileUpload()">Upload</button>
-
-   </div>
-</form>
-
-<div class="button-group">
-  <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="unsubscribeUsers()">unsubscribe</button>
-  <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="deactivateUsers()">Deactivate</button>
-  <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="passwordReset()">password Reset</button>
-  <button class="btn btn-primary button" ng-disabled="noFileData" ng-class="{'disabled':noFileData}" ng-click="triggerDissag()">Trigger dissag</button>
-</div>
 </div>

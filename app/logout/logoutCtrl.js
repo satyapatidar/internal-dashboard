@@ -5,10 +5,10 @@ angular.module('bidgely')
             var promises = {
               removeUtiliyPilot: BidgelyStorage.removeItem('utilityPilot'),
               removeIsLoggedIn : BidgelyStorage.removeItem('isLoggedIn')
-            }
+            };
 
-            $q.all(promises).then(function () {
-                $state.go('utilityPilot');
+            $q.all(promises).then(function() {
+                window.location.href = configurations.webUrl;
             });
         });
   });

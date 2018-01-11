@@ -1,19 +1,17 @@
 <!Doctype html>
 <html>
     <head>
+        <base href="/">
         <link rel="stylesheet" href="lib/angular-ui-bootstrap/dist/ui-bootstrap-csp.css"></link>
         <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap-theme.css"></link>
-
         <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"></link>
-
-        <link rel="stylesheet" href="assests/css/bidgely.css"></link>
         <link rel="stylesheet" href="assests/css/common.css"></link>
-        <base href="/">
+        <link rel="stylesheet" href="assests/css/bidgely.css"></link>
     </head>
     <body>
       <ng-include src="headerTemplate"></ng-include>
-      <div id="wrap">
-          <div ui-view><div class="container"><div class="row"><div class="col-md-12 text-center"><br /><div class="bidgely-loading"></div></div></div></div></div>
+      <div id="wrap" class="container">
+          <div ui-view></div>
       </div>
       <ng-include src="footerTemplate"></ng-include>
 

@@ -4,8 +4,8 @@ angular.module('bidgely')
             name: "",
             password: ""
         };
-        $scope.showAuthFailMsg = false;
-
+        $scope.loginError = null;
+        $scope.btnDisabled = false;
         $scope.$on('$viewContentLoaded', function () {
 
             BidgelyStorage.getItem('utilityPilot').then(function (value) {
@@ -15,11 +15,14 @@ angular.module('bidgely')
 
         $scope.login = function () {
           if (!$scope.user.name || !$scope.user.password) {
+            $scope.loginError = "Please enter username and password.";
             return;
           }
+          $scope.loginError = null;
           if (!$scope.utilityPilot) {
               $state.go('utilityPilot');
           }
+          $scope.btnDisabled = true;
           $http({
               url: "https://" + $scope.utilityPilot.url + "/v2.0/users/authenticate" ,
               method: 'POST',
@@ -31,15 +34,23 @@ angular.module('bidgely')
               }
           }).success(function (data) {
                 if (data.payload.user.roleId !== 'ROLE_ADMIN') {
-                    $scope.showAuthFailMsg = true;
+                    $scope.loginError = "You are not an admin user of Bidgely.";
+                    $scope.btnDisabled = false;
+                    //return;
                 }
                 BidgelyStorage.setItem('isLoggedIn', true).then(function () {
                   $rootScope.authToken = data.payload.accessToken;
                   $state.go('dashboard.search');
                 });
-          }).error(function (err) {
-              console.log("Err");
-              console.log(err);
+          }).error(function (response) {
+              $scope.btnDisabled = false;
+              try {
+                response = JSON.parse(response.error.message);
+                if (response) {
+                  $scope.loginError = response.error.message;
+                }
+              } catch(e) {}
+
           });
         };
 

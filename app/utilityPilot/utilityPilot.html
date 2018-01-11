@@ -9,11 +9,11 @@
                         <div class="form-check" ng-repeat="pilot in utilityPilots">
                             <label class="form-check-label" for="{{pilot.name}}">
                                 <input class="form-check-input" type="radio" ng-model="selectedPilot.name" id="{{pilot.name}}" value="{{pilot.name}}">
-                                {{pilot.name}}
+                                <span> {{pilot.name}}</span>
                             </label>
                         </div>
                         <div class="btn-wrapper">
-                              <button type="submit" class="btn btn-primary btn-md btn-bidgely" ng-click="saveUtilityPilot()">Submit</button>
+                              <button type="submit" class="btn btn-primary btn-md btn-bidgely" ng-click="saveUtilityPilot()">Continue</button>
                         </div>
 
                     </div>

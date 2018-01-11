@@ -8,11 +8,13 @@ angular.module('bidgely')
             }
             switch (type) {
               case 'fileUpload':
-                  $state.go('dashboard.bulkUpdate');
+                $state.go('dashboard.bulkUpdate');
                 break;
               case 'search':
-                  $state.go('dashboard.search');
+                $state.go('dashboard.search');
                 break;
+              case 'changePilot':
+                $state.go('logout');
             }
         }
     });
