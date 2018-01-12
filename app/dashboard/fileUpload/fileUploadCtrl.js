@@ -64,7 +64,7 @@ angular.module('bidgely')
           });
       };
 
-      $scope.triggerDissag = function () {
+      $scope.runAggAndTriggerDisagg = function () {
           $uibModal.open({
               templateUrl: 'app/modal/triggerDissag.html',
               controller: 'TriggerDissagCtrl',

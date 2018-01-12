@@ -4,6 +4,7 @@ angular.module('bidgely')
 
         $scope.actionList = [];
         $scope.disableBtns = false;
+        $scope.isSearching = true;
 
         $scope.$on('$viewContentLoaded', function () {
             BidgelyStorage.getItem('utilityPilot').then(function (value) {
@@ -18,6 +19,7 @@ angular.module('bidgely')
 
 
         var initialise = function () {
+            $scope.errorMesage = null;
             $http({
                 url: "https://" + _utilityPilot.url + "/v2.0/users/" + $stateParams.uuid,
                 headers: {
@@ -27,8 +29,11 @@ angular.module('bidgely')
                 }
             }).success(function (data, status, headers, config) {
                 $scope.userDetail =  data.payload;
+                $scope.isSearching = false;
+                $scope.userDetail['address'] = [$scope.userDetail.homeAccounts.address, $scope.userDetail.homeAccounts.city, $scope.userDetail.homeAccounts.state, $scope.userDetail.homeAccounts.countryCode, $scope.userDetail.homeAccounts.postalCode].join(', ');
             }).error(function (data, status, headers, config) {
-
+                $scope.isSearching = false;
+                $scope.errorMesage = "No data exists.";
             })
         };
 
@@ -63,7 +68,7 @@ angular.module('bidgely')
             });
         };
 
-        $scope.triggerDisagg = function () {
+        $scope.runAggAndTriggerDisagg = function () {
             $scope.actionList = [];
             var modalInstance = $uibModal.open({
                 templateUrl: 'app/modal/triggerDisaggForSingleUser.html',
@@ -78,22 +83,61 @@ angular.module('bidgely')
             });
             modalInstance.result.then(function () {
                 $scope.disableBtns = true;
-                $http({
-                    url: "https://" + _utilityPilot.url + "/meta/users/" + $scope.userDetail.uuid + "/homes/1/modified?urgent=true",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Authorization': 'bearer ' + _utilityPilot.token
+                var promises = {
+                  triggerDisagg: triggerDisagg(),
+                  runAggregation: runAggregation()
+                };
+
+                $q.all(promises).then(function () {
+                    $scope.disableBtns = false;
+                    $scope.actionList.push({msg: "Successfully run aggregations and trigger disagg."});
+                }, function (response) {
+                    $scope.disableBtns = false;
+                    var message = '';
+                    if (status == 500) {
+                       message = "Something went wrong on the server.";
                     }
-                }).success(function (data, status, headers, config) {
-                    $scope.disableBtns = false;
-                    $scope.actionList.push({msg: "Successfully trigger disagg."});
-                }).error(function (response, status) {
-                    $scope.disableBtns = false;
-                    var message = (status == 500) ? "Something went wrong on the server." : response.error.message;
+                    if (response.error) {
+                       message = response.error.message;
+                    }
                     $scope.actionList.push({msg: "Failed: " + message});
-                });
+                })
             });
+        };
+
+        var triggerDisagg = function () {
+            var deferred = $q.defer();
+            $http({
+                url: "https://" + _utilityPilot.url + "/meta/users/" + $scope.userDetail.uuid + "/homes/1/modified?urgent=true",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + _utilityPilot.token
+                }
+            }).success(function (data, status, headers, config) {
+                deferred.resolve();
+            }).error(function (response, status) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
+        };
+
+        var runAggregation = function () {
+            var deferred = $q.defer();
+            $http({
+                url: "https://" + _utilityPilot.url + "/billingdata/users/" + $scope.userDetail.uuid + "/homes/1/run/aggregations",
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + _utilityPilot.token
+                }
+            }).success(function (data, status, headers, config) {
+                deferred.resolve();
+            }).error(function (response, status) {
+                deferred.reject(response);
+            });
+            return deferred.promise;
         };
 
         $scope.deactivate = function () {

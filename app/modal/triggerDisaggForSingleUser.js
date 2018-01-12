@@ -7,7 +7,7 @@ angular.module('bidgely')
           $uibModalInstance.dismiss('cancel');
       };
 
-      $scope.triggerDisagg = function () {
+      $scope.runAggAndTriggerDisagg = function () {
           $uibModalInstance.close();
       };
     });
