@@ -25,6 +25,7 @@
         <div class="name">{{searchResult.firstName}} {{searchResult.lastName}}</div>
         <div class="email">uuid: {{searchResult.uuid}}</div>
         <div class="email">Email: {{searchResult.email}}</div>
+        <div class="email">Role: {{searchResult.roleId}}</div>
         <div class="mobile">Phone #: {{searchResult.homeAccounts.phoneNumber}}</div>
         <div class="mobile" ng-if='searchResult.partnerUserId'>AcountId: {{searchResult.partnerUserId}}</div>
       </div>
@@ -32,5 +33,5 @@
           <button class="btn btn-primary search-btn" ng-click="viewDetail(searchResult.uuid)">View Detail</button>
       </div>
   </div>
-  <div class="no-results" ng-if="(!displaySearchResults || displaySearchResults.length < 0)">No results found.</div>
+  <div class="no-results" ng-if="!isSearching && (!displaySearchResults || displaySearchResults.length == 0)">No results found.</div>
 </div>

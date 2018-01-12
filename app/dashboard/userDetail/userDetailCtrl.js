@@ -5,6 +5,12 @@ angular.module('bidgely')
         $scope.actionList = [];
         $scope.disableBtns = false;
         $scope.isSearching = true;
+        var ROLES = {
+          'ROLE_USER': 'End User',
+          'ROLE_ADMIN': 'Admin',
+          'ROLE_PILOT_ADMIN': 'Pilot Admin',
+          'ROLE_FIELD_AUDITOR': 'Field Auditor'
+        };
 
         $scope.$on('$viewContentLoaded', function () {
             BidgelyStorage.getItem('utilityPilot').then(function (value) {
@@ -29,6 +35,7 @@ angular.module('bidgely')
                 }
             }).success(function (data, status, headers, config) {
                 $scope.userDetail =  data.payload;
+                $scope.userDetail['role'] = ROLES[$scope.userDetail.roleId];
                 $scope.isSearching = false;
                 $scope.userDetail['address'] = [$scope.userDetail.homeAccounts.address, $scope.userDetail.homeAccounts.city, $scope.userDetail.homeAccounts.state, $scope.userDetail.homeAccounts.countryCode, $scope.userDetail.homeAccounts.postalCode].join(', ');
             }).error(function (data, status, headers, config) {
@@ -186,6 +193,7 @@ angular.module('bidgely')
                     $q.all(promises).then(function () {
                         $scope.actionList.push({msg: "Done deactivating."});
                         $scope.disableBtns = false;
+                        $state.reload($state.current.name, $stateParams);
                     }, function (response, status) {
                         var message = "Something went wrong on the server.";
                         $scope.actionList.push({msg: "Failed: " + message});
@@ -243,10 +251,11 @@ angular.module('bidgely')
               var email = "DEACTIVATED-" + data.email;
               var fname = "DEACTIVATED-" + data.firstName;
               var lname = "DEACTIVATED-" + data.lastName;
+              var status = "DISABLED";
               $http({
                   url: "https://" + _utilityPilot.url + "/v2.0/users/" + $scope.userDetail.uuid,
                   method: "POST",
-                  data: JSON.stringify({userName: uname, email: email, firstName: fname, lastName: lname}),
+                  data: JSON.stringify({userName: uname, email: email, firstName: fname, lastName: lname, status: status}),
                   headers: {
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',

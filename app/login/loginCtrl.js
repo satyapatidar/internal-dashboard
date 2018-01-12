@@ -36,7 +36,7 @@ angular.module('bidgely')
                 if (data.payload.user.roleId !== 'ROLE_ADMIN') {
                     $scope.loginError = "You are not an admin user of Bidgely.";
                     $scope.btnDisabled = false;
-                    return;
+                    //return;
                 }
                 BidgelyStorage.setItem('isLoggedIn', true).then(function () {
                   $state.go('dashboard.search');

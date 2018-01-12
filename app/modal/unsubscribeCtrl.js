@@ -13,7 +13,7 @@ angular.module('bidgely')
 
 
         $scope.cancel = function() {
-            $uibModalInstance.close();
+            $uibModalInstance.dismiss('cancel');
         };
 
         var initialize = function () {
@@ -54,10 +54,10 @@ angular.module('bidgely')
                     }
                 }).success(function (data) {
                     $scope.disableBtn = false;
-                    $scope.message = "Unsubscribe Successfully.";
+                    $scope.message = "Unsubscribed successfully.";
                 }).error(function (err) {
                     $scope.disableBtn = false;
-                    $scope.message = "Unsubscribe action Failed.";
+                    $scope.message = "Failed";
                 });
             }
         };

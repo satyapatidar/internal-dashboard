@@ -21,6 +21,7 @@ angular.module('bidgely')
 
         var getSearchResult = function () {
             $scope.isSearching = true;
+            $scope.displaySearchResults = [];
             var deferred = $q.defer();
             var url = "https://" + $scope.utilityPilot.url + "/v2.0/users/search";
             if ($scope.search.query) {

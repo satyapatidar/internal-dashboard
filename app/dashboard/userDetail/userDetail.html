@@ -13,11 +13,13 @@
     <div ng-if="userDetail">
         <div class="details ">
             <div class="name">{{userDetail.firstName}} {{userDetail.lastName}}</div>
-            <div class="mobile" ng-if="userDetail.uuid">uuid: {{userDetail.uuid}}</div>
-            <div class="email" ng-if="userDetail.email">Email: {{userDetail.email}}</div>
-            <div class="mobile" ng-if="userDetail.homeAccounts.phoneNumber">Phone #: {{userDetail.homeAccounts.phoneNumber}}</div>
-            <div class="mobile" ng-if="userDetail.address">Address: {{userDetail.address}}</div>
-            <div ng-if='userDetail.partnerUserId'>AcountId: {{userDetail.partnerUserId}}</div>
+            <div class="mobile" ng-if="userDetail.uuid"><label>uuid:</label> {{userDetail.uuid}}</div>
+            <div class="email" ng-if="userDetail.email"><label>Email:</label> {{userDetail.email}}</div>
+            <div class="email"><label>Role:</label> <span class="label label-default">{{userDetail.role}}</span></div>
+            <div class="mobile" ng-if="userDetail.homeAccounts.phoneNumber"><label>Phone #:</label> {{userDetail.homeAccounts.phoneNumber}}</div>
+            <div class="mobile" ng-if="userDetail.address"><label>Address:</label> {{userDetail.address}}</div>
+            <div ng-if='userDetail.partnerUserId'><label>AcountId:</label> {{userDetail.partnerUserId}}</div>
+            <div><label>Status:</label> <span class="label" ng-class="{'label-success': userDetail.status == 'ENABLED', 'label-danger': userDetail.status == 'DISABLED'}">{{userDetail.status}}</span>
         </div>
 
         <div class="actions-list" ng-if="actionList.length > 0">
