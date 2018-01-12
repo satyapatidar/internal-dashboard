@@ -15,6 +15,7 @@
             <div class="name">{{userDetail.firstName}} {{userDetail.lastName}}</div>
             <div class="mobile" ng-if="userDetail.uuid"><label>uuid:</label> {{userDetail.uuid}}</div>
             <div class="email" ng-if="userDetail.email"><label>Email:</label> {{userDetail.email}}</div>
+            <div class="email" ng-if="userDetail.email"><label>Email:</label> {{userDetail.userName}}</div>
             <div class="email"><label>Role:</label> <span class="label label-default">{{userDetail.role}}</span></div>
             <div class="mobile" ng-if="userDetail.homeAccounts.phoneNumber"><label>Phone #:</label> {{userDetail.homeAccounts.phoneNumber}}</div>
             <div class="mobile" ng-if="userDetail.address"><label>Address:</label> {{userDetail.address}}</div>
