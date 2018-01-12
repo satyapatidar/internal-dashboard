@@ -38,7 +38,7 @@ angular.module('bidgely')
                 deferred.resolve(data.payload);
             }).error(function (err) {
                 $scope.isSearching = false;
-                deferred.reslove(error);
+                deferred.resolve(err);
             })
             return deferred.promise;
         };
