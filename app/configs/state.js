@@ -28,6 +28,11 @@ bidgelyApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
           templateUrl: 'app/dashboard/search/search.html',
           controller: "SearchCtrl"
       })
+      .state('dashboard.viewDetail', {
+          url: '/dashboard/viewDetail/:uuid',
+          templateUrl: 'app/dashboard/userDetail/userDetail.html',
+          controller: "UserDetailCtrl"
+      })
       .state('dashboard.bulkUpdate', {
           url: '/dashboard/bulkUpdate',
           templateUrl: 'app/dashboard/fileUpload/fileUpload.html',

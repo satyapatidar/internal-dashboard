@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Trigger Disagg</h3>
+</div>
+<div class="modal-body" id="modal-body">
+  <p>Are you sure to Trigger Disagg this <strong>{{user.firstName}} {{user.lastName}}</strong>?</p>
+  <div class="actions-list" ng-if="actionList.length > 0">
+    <p><strong>Messages:</strong></p>
+     <div class="action-message" ng-repeat="action in actionList">
+         {{action.msg}}
+     </div>
+  </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-disabled="disableBtn" ng-click="triggerDisagg()">Run Disagg</button>
+    <button class="btn btn-default" type="button" ng-disabled="disableBtn" ng-click="cancel()">Close</button>
+</div>

@@ -1,0 +1,32 @@
+
+
+<div class="card group dashboard-container">
+    <h2 class="card-heading">View Details : </h2>
+
+    <div ng-if="!userDetail" class="loading-spinner">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div  ng-if="userDetail">
+        <div class="details ">
+            <div class="name">{{userDetail.firstName}} {{userDetail.lastName}}</div>
+            <div class="email">Email: {{userDetail.email}}</div>
+            <div class="mobile">Phone #: {{userDetail.homeAccounts.phoneNumber}}</div>
+            <div ng-if='userDetail.partnerUserId'>AcountId: {{userDetail.partnerUserId}}</div>
+        </div>
+
+        <div class="actions-list" ng-if="actionList.length > 0">
+          <p><strong>Messages:</strong></p>
+           <div class="action-message" ng-repeat="action in actionList">
+               {{action.msg}}
+           </div>
+        </div>
+
+        <div class="button-group">
+          <button class="btn btn-primary button" ng-disabled="disableBtns" ng-class="{'disabled':disableBtns}" ng-click="updateUser()">Update Detail</button>
+          <button class="btn btn-primary button" ng-disabled="disableBtns" ng-class="{'disabled':disableBtns}" ng-click="unsubscribe()">Unsubscribe</button>
+          <button class="btn btn-primary button" ng-disabled="disableBtns" ng-class="{'disabled':disableBtns}" ng-click="deactivate()">Deactivate</button>
+          <button class="btn btn-primary button" ng-disabled="disableBtns" ng-class="{'disabled':disableBtns}" ng-click="triggerDisagg()">Trigger Disagg</button>
+        </div>
+    </div>
+</div>

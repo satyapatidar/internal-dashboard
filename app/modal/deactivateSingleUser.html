@@ -1,11 +1,8 @@
 <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">Password Reset </h3>
+    <h3 class="modal-title" id="modal-title">Deactivate user</h3>
 </div>
  <div class="modal-body" id="modal-body">
-   <p>Please enter password you want to set for each user you set in the file</p>
-   <div class="form-group">
-     <input type="text" class="form-control" ng-model="user.newPassword" placeholder="Enter Password" />
-   </div>
+   <p>Are you sure to Deactive this <strong>{{user.firstName}} {{user.lastName}}</strong>?</p>
    <div class="actions-list" ng-if="actionList.length > 0">
      <p><strong>Messages:</strong></p>
       <div class="action-message" ng-repeat="action in actionList">
@@ -14,6 +11,6 @@
    </div>
  </div>
  <div class="modal-footer">
-     <button class="btn btn-primary" type="button" ng-disabled="disableBtn" ng-click="resetPaasword()">Reset Password</button>
+     <button class="btn btn-primary" type="button" ng-disabled="disableBtn" ng-click="deactivate()">Deactive</button>
      <button class="btn btn-default" type="button" ng-disabled="disableBtn" ng-click="cancel()">Close</button>
  </div>

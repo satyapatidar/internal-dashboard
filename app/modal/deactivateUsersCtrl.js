@@ -97,7 +97,7 @@ angular.module('bidgely')
                     'Authorization': 'bearer ' + _utilityPilot.token
                 }
             }).success(function (data, status, headers, config) {
-                deferred.resolve(data);
+                deferred.resolve(data.payload);
             }).error(function (data, status, headers, config) {
                 deferred.reject();
             })

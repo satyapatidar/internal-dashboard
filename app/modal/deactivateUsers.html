@@ -3,12 +3,12 @@
 </div>
  <div class="modal-body" id="modal-body">
    <p>Please click on the Deactive button button below to start the process.</p>
- </div>
- <div class="actions-list" ng-if="actionList.length > 0">
-   <p><strong>Messages:</strong></p>
-    <div class="action-message" ng-repeat="action in actionList">
-        {{action.msg}}
-    </div>
+   <div class="actions-list" ng-if="actionList.length > 0">
+     <p><strong>Messages:</strong></p>
+      <div class="action-message" ng-repeat="action in actionList">
+          {{action.msg}}
+      </div>
+   </div>
  </div>
  <div class="modal-footer">
      <button class="btn btn-primary" type="button" ng-disabled="disableBtn" ng-click="deactivate()">Deactivate</button>

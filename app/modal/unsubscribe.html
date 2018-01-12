@@ -1,18 +1,13 @@
 <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">Unsubscribe users</h3>
+    <h3 class="modal-title" id="modal-title">Unsubscribe User</h3>
 </div>
  <div class="modal-body" id="modal-body">
-    <p>Please select events you want the uploaded users to unsubscribe for:</p>
+    <p>Please select events you want this user to unsubscribe for:</p>
      <div class="event-row" ng-repeat="event in emailEvents">
           <label> <input type="checkbox" ng-model="event.value" name="chk-eventType" ng-checked="event.value"/>  <span>{{event.text}}</span>
      </div>
-     <div class="actions-list" ng-if="actionList.length > 0">
-       <p><strong>Messages:</strong></p>
-        <div class="action-message" ng-repeat="action in actionList">
-            {{action.msg}}
-        </div>
-     </div>
-
+     <div ng-if="message">{{message}} </div>
+ </div>
  </div>
  <div class="modal-footer">
      <button class="btn btn-primary" type="button" ng-disabled="disableBtn" ng-click="unsubscribe()">Unsubscribe</button>
